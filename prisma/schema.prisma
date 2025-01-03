@@ -11,12 +11,12 @@ datasource db {
 }
 
 model reviews {
-  id        String    @id
+  id        String   @id
   title     String
-  auther    String
+  author    String
   price     Int
   publisher String
-  Published String
+  published String
   image     String
   read      DateTime @default(now())
   memo      String
