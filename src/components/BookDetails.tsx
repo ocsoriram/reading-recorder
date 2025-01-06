@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 type BookDetailsProps = {
   index?: number; // indexはオプショナル
-  book: reviews
+  book: reviews;
 };
 
 export default function BookDetails({ index, book }: BookDetailsProps) {
