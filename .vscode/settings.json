@@ -19,9 +19,15 @@
     },
     "[javascriptreact]": {             // JavaScript React（.jsx）用のインデント設定
         "editor.tabSize": 2
-  },
-  "errorLens.messageTemplate": "$message",
-  "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 80, // 必要に応じて調整
-  "editor.rulers": [80] // ガイドラインを表示
+    },
+    "errorLens.messageTemplate": "$message",
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 80, // 必要に応じて調整
+    "editor.rulers": [80],// ガイドラインを表示
+    
+    "editor.parameterHints.enabled": true,
+    "editor.suggest.showMethods": true,
+    "editor.suggest.insertMode": "insert",
+    "typescript.suggest.completeFunctionCalls": true
+
 }
