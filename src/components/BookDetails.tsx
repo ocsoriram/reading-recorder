@@ -11,7 +11,7 @@ export default function BookDetails({ index, book }: BookDetailsProps) {
     <div className="flex w-full mb-4">
       {/* 書影を表示 */}
       <div>
-        <Image src={book.image} alt={book.title} width={140} height={180} />
+        <Image src={book.image || "/globe.svg"} alt={book.title} width={140} height={180} />
       </div>
 
       {/* 書籍情報をリスト表示 */}
