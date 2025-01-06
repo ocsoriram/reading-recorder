@@ -2,20 +2,24 @@
     "typescript.preferences.importModuleSpecifier": "relative",
     "javascript.preferences.importModuleSpecifier": "relative",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
+      "source.organizeImports": "always",
+      "source.fixAll": "always", // ESLintとPrettier両方を動作させる
+      "source.fixAll.eslint": "always" // ESLintのエラーチェックを適用
     },
     "typescript.suggest.autoImports": true,
     "javascript.suggest.autoImports": true,
     "editor.tabSize": 2,               // インデント幅を2スペースに設定
     "editor.insertSpaces": true,       // タブをスペースに変換
     "[typescript]": {                  // TypeScriptファイル用のインデント設定
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {             // TypeScript React（.tsx）用のインデント設定
         "editor.tabSize": 2
     },
     "[javascript]": {                  // JavaScriptファイル用のインデント設定
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode" // Prettierをデフォルトフォーマッターに指定
     },
     "[javascriptreact]": {             // JavaScript React（.jsx）用のインデント設定
         "editor.tabSize": 2
@@ -28,6 +32,8 @@
     "editor.parameterHints.enabled": true,
     "editor.suggest.showMethods": true,
     "editor.suggest.insertMode": "insert",
-    "typescript.suggest.completeFunctionCalls": true
+    "typescript.suggest.completeFunctionCalls": true,
+
+
 
 }
