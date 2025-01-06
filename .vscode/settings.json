@@ -15,14 +15,16 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {             // TypeScript React（.tsx）用のインデント設定
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascript]": {                  // JavaScriptファイル用のインデント設定
         "editor.tabSize": 2,
         "editor.defaultFormatter": "esbenp.prettier-vscode" // Prettierをデフォルトフォーマッターに指定
     },
     "[javascriptreact]": {             // JavaScript React（.jsx）用のインデント設定
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "errorLens.messageTemplate": "$message",
     "editor.wordWrap": "on",
