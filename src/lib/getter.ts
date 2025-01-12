@@ -1,4 +1,6 @@
+import type { GoogleBooksApiResponse } from '../types/api/googlebooks';
 import { Volume } from '../types/api/googlebooks';
+import type { BookWithReview } from '../types/common';
 import prisma from './prisma';
 
 export async function getAllReviews() {
@@ -31,17 +33,15 @@ export function createBook(book: Volume) {
 }
 
 //引数keywordをキーにGoogle Books APIから書籍情報を検索する
-export async function getBooksByKeyword(keyword: string) {
+export async function getBooksByKeyword(
+  keyword: string
+): Promise<BookWithReview[]> {
+  const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
   const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=20&printType=books`
+    `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=20&printType=books&key=${apiKey}`
   );
-  const result = await res.json();
-  const books = [];
-  //応答内容をオブジェクト配列に詰め替え
-  for (const b of result.items) {
-    books.push(createBook(b));
-  }
-  return books;
+  const result = (await res.json()) as GoogleBooksApiResponse;
+  return (result.items || []).map((b) => createBook(b));
 }
 
 export async function getBookById(id: string) {
