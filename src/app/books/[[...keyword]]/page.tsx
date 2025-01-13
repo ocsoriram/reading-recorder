@@ -1,9 +1,16 @@
 import LinkedBookDetails from '../../../components/LinkedBookDetails';
 import { getBooksByKeyword } from '../../../lib/getter';
 
-//ルートパタメータkeywordを取得。規定値はReact
-export default async function BookResult({ params: { keyword = 'React' } }) {
-  //与えられたキーワードで書籍情報を検索
+type SearchParams = { keyword?: string[] };
+
+export default async function BookResult({
+  params,
+}: {
+  params: SearchParams;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  const keyword = params.keyword?.[0] || 'React';
+
   const books = await getBooksByKeyword(keyword);
 
   return (
