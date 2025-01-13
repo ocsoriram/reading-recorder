@@ -16,7 +16,7 @@ export default async function BookResult({
   return (
     <>
       {books.map((b, i) => (
-        <LinkedBookDetails book={b} index={i + 1} key={b.id} />
+        <LinkedBookDetails book={b} index={i} key={b.id} />
       ))}
     </>
   );
