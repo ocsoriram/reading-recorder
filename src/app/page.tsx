@@ -7,7 +7,6 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const reviews = await getAllReviews();
-  console.log(reviews);
   return (
     <>
       {/*取得したレビュー情報を元にリストを作成 */}
