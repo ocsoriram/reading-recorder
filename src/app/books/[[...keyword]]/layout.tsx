@@ -35,6 +35,7 @@ export default function BooksLayout({ children }: LayoutProps) {
         </button>
       </form>
       <hr />
+      {children}
     </>
   );
 }
