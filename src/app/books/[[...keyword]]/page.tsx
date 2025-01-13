@@ -3,13 +3,9 @@ import { getBooksByKeyword } from '../../../lib/getter';
 
 type SearchParams = { keyword?: string[] };
 
-export default async function BookResult({
-  params,
-}: {
-  params: SearchParams;
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  const keyword = params.keyword?.[0] || 'React';
+export default async function BookResult({ params }: { params: SearchParams }) {
+  const searchParams = await params;
+  const keyword = searchParams.keyword?.[0] || 'React';
 
   const books = await getBooksByKeyword(keyword);
 
