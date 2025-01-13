@@ -16,7 +16,7 @@ export default function BookDetails({ index, book }: BookDetailsProps) {
 
       {/* 書籍情報をリスト表示 */}
       <div className='ml-4'>
-        <ul className='list-none text-black'>
+        <ul className='list-none text-text-primary'>
           {/* indexが指定された場合に連番を表示 */}
           {index !== undefined && <li>{index + 1}.</li>}
           <li>
