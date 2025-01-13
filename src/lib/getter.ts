@@ -18,17 +18,22 @@ export async function getAllReviews() {
 
 //API経由で取得した書籍情報から必要な情報だけをオブジェクトに詰め替える
 export function createBook(book: Volume) {
+  if (!book?.volumeInfo) {
+    throw new Error('無効な書籍データです');
+  }
+
   const authors = book.volumeInfo?.authors || [];
   const price = book.saleInfo?.listPrice;
   const img = book.volumeInfo?.imageLinks;
+
   return {
-    id: book.id,
-    title: book.volumeInfo.title,
-    author: authors ? authors.join(',') : '',
-    price: price ? price.amount : 0,
-    publisher: book.volumeInfo.publisher,
-    published: book.volumeInfo.publishedDate,
-    image: img ? img.smallThumbnail : '/vercel.svg',
+    id: book.id || '',
+    title: book.volumeInfo.title || '不明なタイトル',
+    author: authors.length > 0 ? authors.join(',') : '不明な著者',
+    price: price?.amount || 0,
+    publisher: book.volumeInfo.publisher || '不明な出版社',
+    published: book.volumeInfo.publishedDate || '不明な出版日',
+    image: img?.smallThumbnail || '/vercel.svg',
   };
 }
 
@@ -36,18 +41,63 @@ export function createBook(book: Volume) {
 export async function getBooksByKeyword(
   keyword: string
 ): Promise<BookWithReview[]> {
-  const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
-  const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=20&printType=books&key=${apiKey}`
-  );
-  const result = (await res.json()) as GoogleBooksApiResponse;
-  return (result.items || []).map((b) => createBook(b));
+  try {
+    const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+    if (!apiKey) {
+      throw new Error('Google Books APIキーが設定されていません');
+    }
+
+    const res = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=20&printType=books&key=${apiKey}`
+    );
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error('Google Books APIエラー詳細:', errorData);
+      throw new Error(
+        `API エラー: ${res.status} - ${JSON.stringify(errorData)}`
+      );
+    }
+
+    const result = (await res.json()) as GoogleBooksApiResponse;
+
+    if (!result || !result.items) {
+      return [];
+    }
+
+    return result.items.map((b) => createBook(b));
+  } catch (error) {
+    console.error('書籍検索エラー:', error);
+    throw new Error('書籍の検索に失敗しました');
+  }
 }
 
 export async function getBookById(id: string) {
-  const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
-  const result = await res.json();
-  return createBook(result);
+  try {
+    const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+    if (!apiKey) {
+      throw new Error('Google Books APIキーが設定されていません');
+    }
+
+    const res = await fetch(
+      `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`
+    );
+
+    if (!res.ok) {
+      throw new Error(`API エラー: ${res.status}`);
+    }
+
+    const result = await res.json();
+
+    if (!result || !result.volumeInfo) {
+      throw new Error('書籍情報が見つかりませんでした');
+    }
+
+    return createBook(result);
+  } catch (error) {
+    console.error('書籍取得エラー:', error);
+    throw new Error('書籍情報の取得に失敗しました');
+  }
 }
 
 export async function getReviewById(id: string) {
