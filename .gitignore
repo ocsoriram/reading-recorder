@@ -41,5 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 #sqlite
-*.debug
-*.db-jurnal
+*.db
+*.db-journal
+prisma/dev.db
+prisma/dev.db-journal
