@@ -20,7 +20,7 @@ export default function FormEdit({
           type='date'
           id='read'
           name='read'
-          className='block bg-gray-100 boader-2 border-gray-600 rounded focus:bg-white focus:outline-none focus:border-red-500'
+          className='block bg-gray-100 boader-2 border-gray-600 rounded focus:bg-white focus:outline-none focus:border-red-500 dark:text-black'
           defaultValue={read}
         />
       </div>
@@ -32,7 +32,7 @@ export default function FormEdit({
           name='memo'
           id='memo'
           rows={3}
-          className='block bg-gray-100 border-2 border-gray-600 w-full rounded focus:bg-white focus:outline-none focus:border-red-500'
+          className='block bg-gray-100 border-2 border-gray-600 w-full rounded focus:bg-white focus:outline-none focus:border-red-500 dark:text-black'
           defaultValue={memo}
         ></textarea>
       </div>
