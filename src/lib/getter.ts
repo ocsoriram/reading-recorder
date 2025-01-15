@@ -107,3 +107,24 @@ export async function getReviewById(id: string) {
     },
   });
 }
+
+export async function getReviewsByPage(page: number, limit: number) {
+  try {
+    const skip = (page - 1) * limit;
+    const reviews = await prisma.reviews.findMany({
+      orderBy: { read: 'desc' },
+      take: limit,
+      skip: skip,
+    });
+
+    const total = await prisma.reviews.count();
+
+    return {
+      reviews,
+      hasMore: skip + reviews.length < total,
+    };
+  } catch (error) {
+    console.error('Prisma Error:', error);
+    throw new Error('Failed to fetch reviews');
+  }
+}

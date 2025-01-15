@@ -11,7 +11,7 @@ export default async function Home() {
     <>
       {/*取得したレビュー情報を元にリストを作成 */}
       {reviews.map((b, i) => (
-        <LinkedBookDetails book={b} index={i + 1} key={b.id} />
+        <LinkedBookDetails book={b} index={i} key={b.id} />
       ))}
     </>
   );
