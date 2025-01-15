@@ -1,22 +1,22 @@
-import { reviews } from "@prisma/client";
 import Image from 'next/image';
-
-type BookDetailsProps = {
-  index?: number; // indexはオプショナル
-  book: reviews
-};
+import type { BookDetailsProps } from '../types/common';
 
 export default function BookDetails({ index, book }: BookDetailsProps) {
   return (
-    <div className="flex w-full mb-4">
+    <div className='flex w-full mb-4'>
       {/* 書影を表示 */}
       <div>
-        <Image src={book.image} alt={book.title} width={140} height={180} />
+        <Image
+          src={book.image || '/globe.svg'}
+          alt={book.title}
+          width={140}
+          height={180}
+        />
       </div>
 
       {/* 書籍情報をリスト表示 */}
-      <div className="ml-4">
-        <ul className="list-none text-black">
+      <div className='ml-4'>
+        <ul className='list-none text-primary'>
           {/* indexが指定された場合に連番を表示 */}
           {index !== undefined && <li>{index + 1}.</li>}
           <li>
