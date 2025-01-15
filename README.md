@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Reading Recorder
 
-## Getting Started
+## 概要
+Reading Recorderは、読んだ本の記録を管理するためのWebアプリケーションです。Google Books APIを利用して書籍情報を検索し、読了日と感想を記録することができます。
 
-First, run the development server:
+## 主な機能
+- 書籍の検索（Google Books API連携）
+- 読了日の記録
+- 感想の記録
+- 読書履歴の管理
 
+## 技術スタック
+- Next.js 15.1.3
+- React 19.0.0
+- TypeScript
+- Tailwind CSS
+- Prisma (SQLite)
+- Jest (テスティング)
+
+## 必要要件
+- Node.js 18.0.0以上
+- npm または yarn
+- Google Books APIキー
+
+## セットアップ手順
+
+1. リポジトリのクローン
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [リポジトリURL]
+cd reading-recorder
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 依存関係のインストール
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. データベースのマイグレーション
+```bash
+npx prisma migrate dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. 開発サーバーの起動
+```bash
+npm run dev
+```
 
-## Learn More
+5. ブラウザでアプリケーションにアクセス
+```bash
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 使い方
+1. トップページでは、記録した本の一覧が表示されます
+2. 「Search」から書籍を検索できます
+3. 書籍を選択すると、読了日と感想を記録できます
+4. 記録した内容は編集・削除が可能です
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ライセンス
+MIT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 作者
+Seiya.K (react実践入門の巻末付録を参考にしています)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 謝辞
+- このプロジェクトはGoogle Books APIを使用しています
+- Next.jsチームの素晴らしいフレームワークに感謝します
