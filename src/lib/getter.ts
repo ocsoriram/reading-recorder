@@ -39,7 +39,9 @@ export function createBook(book: Volume) {
 
 //引数keywordをキーにGoogle Books APIから書籍情報を検索する
 export async function getBooksByKeyword(
-  keyword: string
+  keyword: string,
+  page: number = 1,
+  limit: number = 10
 ): Promise<BookWithReview[]> {
   try {
     const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
@@ -47,8 +49,9 @@ export async function getBooksByKeyword(
       throw new Error('Google Books APIキーが設定されていません');
     }
 
+    const startIndex = (page - 1) * limit;
     const res = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=20&printType=books&key=${apiKey}`
+      `https://www.googleapis.com/books/v1/volumes?q=${keyword}&langRestrict=ja&maxResults=${limit}&startIndex=${startIndex}&printType=books&key=${apiKey}`
     );
 
     if (!res.ok) {
